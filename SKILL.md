@@ -33,6 +33,20 @@ Supported environments:
 - Reviewing hook code for quality
 - Migrating legacy hooks to the correct pattern
 
+## Prerequisites
+
+If the project does not have SWR installed:
+
+1. Run `npm install swr` (or the project's package manager equivalent)
+2. Create `lib/swr-keys.ts` with the base factory structure:
+   ```typescript
+   export const swrKeys = {} as const;
+   ```
+3. Create `lib/swr-config.ts` with default configuration values
+4. Wrap the app root with `SWRConfig` and a default fetcher
+
+If `lib/swr-keys.ts` already exists, add new keys there — NEVER create a second key file.
+
 ## File Structure
 
 Every hook MUST live in its own directory with this exact layout:

@@ -27,18 +27,29 @@ Note: `useEffect` is NOT valid for data fetching, but IS valid for side effects 
 
 After creating or modifying a hook, verify:
 
-- [ ] Directory structure: `hooks/use-hook-name/` with `index.ts` + `use-hook-name.ts` + optional `.types.ts` + optional `.test.ts`
-- [ ] Barrel export: `export { useHookName } from './use-hook-name'`
-- [ ] Data fetching uses `useSWR` / `useSWRInfinite` / `useSWRMutation` (never manual fetch + useState)
-- [ ] Keys come from `swrKeys` factory (never hardcoded strings)
-- [ ] Config values from centralized `lib/swr-config.ts`
-- [ ] No anti-patterns from the checklist above
-- [ ] No manual `useMemo`/`useCallback` (if React Compiler is enabled; acceptable otherwise)
-- [ ] Types properly defined: no `any`, explicit return type, `.types.ts` for 3+ interfaces
-- [ ] Hook is under ~300 lines with single responsibility
-- [ ] No duplicated utilities — check `lib/utils/` first
-- [ ] Loading states used correctly: `isLoading` for skeletons, `isValidating` for background
-- [ ] Conditional fetching uses `null` key (not `enabled` flag)
-- [ ] Optimistic updates include `rollbackOnError: true`
-- [ ] Project build command passes
-- [ ] Project lint command passes
+1. Confirm directory structure: `hooks/use-hook-name/` with `index.ts` + `use-hook-name.ts` + optional `.types.ts` + optional `.test.ts`
+2. Confirm barrel export: `export { useHookName } from './use-hook-name'`
+3. Verify data fetching uses `useSWR` / `useSWRInfinite` / `useSWRMutation` (never manual fetch + useState)
+4. Verify keys come from `swrKeys` factory (never hardcoded strings)
+5. Verify config values from centralized `lib/swr-config.ts`
+6. Check for no anti-patterns from the checklist above
+7. Check for no manual `useMemo`/`useCallback` (if React Compiler is enabled; acceptable otherwise)
+8. Verify types properly defined: no `any`, explicit return type, `.types.ts` for 3+ interfaces
+9. Confirm hook is under ~300 lines with single responsibility
+10. Check for no duplicated utilities — check `lib/utils/` first
+11. Verify loading states used correctly: `isLoading` for skeletons, `isValidating` for background
+12. Verify conditional fetching uses `null` key (not `enabled` flag)
+13. Verify optimistic updates include `rollbackOnError: true`
+14. Run project build command and confirm it passes
+15. Run project lint command and confirm it passes
+
+## Troubleshooting
+
+| Failure | Cause | Fix |
+|---------|-------|-----|
+| Build fails with type errors after hook creation | Return type annotation doesn't match actual return | Check the `UseHookNameReturn` type matches the hook's return object exactly |
+| Tests fail with `act()` warning | Assertions run before async state settles | Wrap assertions in `waitFor(() => { ... })` |
+| `useSWR` returns `undefined` data but network shows 200 | Key mismatch or fetcher not receiving the key correctly | Verify the key passed to `useSWR` matches what `swrKeys` factory produces; check fetcher receives the serialized key |
+| Optimistic update doesn't rollback on error | Missing `rollbackOnError: true` in mutate options | Add `rollbackOnError: true` to the `mutate()` options object |
+| Hook causes infinite re-renders | Calling `mutate()` inside `useEffect` without proper deps | Move `mutate()` calls to event handlers or `onSuccess` callbacks — never inside `useEffect` |
+| SWR makes duplicate requests on mount | `dedupingInterval` too low or provider creates new cache each render | Set `dedupingInterval` in `SWRConfig`; ensure `provider` function is stable (not inline) |

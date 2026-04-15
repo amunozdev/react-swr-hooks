@@ -9,15 +9,18 @@ description: >
   "swr mutation", "useSWRMutation", "swr infinite", "swr middleware".
   Do NOT use for TanStack Query projects — use react-tanstack-hooks instead.
   Do NOT use for general React component development or non-hook utilities.
+  Do NOT use for client state management (Zustand, Redux, Recoil, Jotai).
 license: MIT
 metadata:
-  author: alexismunoz1
+  author: amunozdev
   version: "1.0.0"
 ---
 
 ## Purpose
 
 You enforce hook development standards for React projects using SWR. Every custom hook MUST follow these rules. Apply them when creating new hooks, modifying existing ones, or reviewing hook code. Target SWR 2.x APIs (`useSWR`, `useSWRMutation`, `useSWRInfinite`).
+
+**Scope: server state only** — data fetching, caching, revalidation, and mutations via SWR. This skill does NOT cover client state management (Zustand, Redux, Recoil, Jotai).
 
 Supported environments:
 - React Native / Expo

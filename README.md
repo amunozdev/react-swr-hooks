@@ -5,12 +5,12 @@ Hook development conventions for React projects using SWR (stale-while-revalidat
 ## Install
 
 ```bash
-npx skills add alexismunoz1/react-swr-hooks
+npx skills add amunozdev/react-swr-hooks
 ```
 
 ## What is this?
 
-A Claude Code skill that enforces consistent, production-quality hook patterns in any React project using SWR. It guides Claude to create hooks with proper directory structure, centralized key factories, typed returns, and co-located tests.
+An AI coding skill that enforces consistent, production-quality hook patterns in any React project using SWR. It guides Claude to create hooks with proper directory structure, centralized key factories, typed returns, and co-located tests.
 
 ## Supported Environments
 
@@ -22,11 +22,11 @@ A Claude Code skill that enforces consistent, production-quality hook patterns i
 
 ## TanStack Query?
 
-If your project uses TanStack Query instead of SWR, use [react-tanstack-hooks](https://github.com/alexismunoz1/react-tanstack-hooks) instead.
+If your project uses TanStack Query instead of SWR, use [react-tanstack-hooks](https://github.com/amunozdev/react-tanstack-hooks) instead.
 
 ## Next.js?
 
-If your project uses Next.js (Server Components, SSR, `'use client'`), use [nextjs-tanstack-hooks](https://github.com/alexismunoz1/nextjs-tanstack-hooks) instead. It includes Server Component directives, SSR hydration patterns, and `useActionState` support.
+If your project uses Next.js (Server Components, SSR, `'use client'`), use [nextjs-tanstack-hooks](https://github.com/amunozdev/nextjs-tanstack-hooks) instead. It includes Server Component directives, SSR hydration patterns, and `useActionState` support.
 
 ## License
 
